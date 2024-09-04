@@ -19,10 +19,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 
-/*
- * QUICK_TAP_TERM 0
-
-*/
 #pragma once
 
 #undef MANUFACTURER
@@ -43,8 +39,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define COMBO_COUNT 1
 #define COMBO_TERM 60
 
-#undef RGBLED_NUM
-#define RGBLED_NUM 24
+#undef RGBLIGHT_LED_COUNT
+#define RGBLIGHT_LED_COUNT 24
 #define RGBLED_SPLIT { 12, 12 }
 
 #define RGBLIGHT_SLEEP
