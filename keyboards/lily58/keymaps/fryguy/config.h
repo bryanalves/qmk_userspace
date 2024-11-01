@@ -26,7 +26,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #undef PRODUCT
 #define PRODUCT "Lily58"
 
-#define MASTER_LEFT
+#define MASTER_RIGHT
 
 #define TAPPING_TERM 175
 #define TAPPING_TOGGLE 2
