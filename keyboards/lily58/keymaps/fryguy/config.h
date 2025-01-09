@@ -28,17 +28,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define MASTER_RIGHT
 
-#define TAPPING_TERM 175
-#define TAPPING_TOGGLE 2
-#define TAPPING_FORCE_HOLD_PER_KEY
-#define PERMISSIVE_HOLD_PER_KEY
-#define TAPPING_TERM_PER_KEY
-#define DYNAMIC_TAPPING_TERM_INCREMENT 10
-// #define HOLD_ON_OTHER_KEY_PRESS_PER_KEY
-
-#define COMBO_COUNT 1
-#define COMBO_TERM 60
-
 #undef RGBLIGHT_LED_COUNT
 #define RGBLIGHT_LED_COUNT 24
 #define RGBLED_SPLIT { 12, 12 }
