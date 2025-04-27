@@ -47,7 +47,7 @@ void write_host_led_state(void) {
 
 void write_rgb_state(void) {
     static char rgbStatusLine[26] = {0};
-    snprintf(rgbStatusLine, sizeof(rgbStatusLine), "%d %d/%d/%d/%d", rgblight_get_mode(), rgblight_get_hue(), rgblight_get_sat(), rgblight_get_val(), rgb_matrix_get_speed());
+    snprintf(rgbStatusLine, sizeof(rgbStatusLine), "%d %d/%d/%d/%d", rgblight_get_mode(), rgblight_get_hue(), rgblight_get_sat(), rgblight_get_val(), rgblight_get_speed());
     oled_write_ln(rgbStatusLine, false);
 }
 
