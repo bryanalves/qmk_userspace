@@ -2,12 +2,12 @@
 
 void write_layer_state(void) {
     switch (layer_state) {
-        case _QWERTY:
+        case _QWERTY_MODS:
            oled_write_ln_P(PSTR("Layer: Default"), false);
            break;
 
-        case 1 << _QWERTY_MODS:
-            oled_write_ln_P(PSTR("Layer: H-Mods"), false);
+        case 1 << _QWERTY:
+            oled_write_ln_P(PSTR("Layer: Qwerty"), false);
             break;
 
         case 1 << _FUNC1:
@@ -63,18 +63,6 @@ void write_qmk_logo(void) {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case KC_HMOD:
-            if (record->event.pressed) {
-                if (IS_LAYER_ON(_QWERTY_MODS)) {
-                    layer_off(_QWERTY_MODS);
-                }
-                else {
-                    layer_on(_QWERTY_MODS);
-                }
-            }
-
-            return false;
-
         case FWD_CFG:
         case REV_CFG:
             if (record->event.pressed) {

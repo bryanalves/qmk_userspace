@@ -3,15 +3,14 @@
 #include QMK_KEYBOARD_H
 
 enum layer_number {
-    _QWERTY = 0,
-    _QWERTY_MODS,
+    _QWERTY_MODS = 0,
+    _QWERTY,
     _FUNC1,
     _FUNC2,
 };
 
 enum custom_keycodes {
-    KC_HMOD = SAFE_RANGE,
-    KC_DBG,
+    KC_DBG = SAFE_RANGE,
     FWD_CFG,  // turn encoder while holding mod combinations to adjust features
     REV_CFG,  // e.g. RGB settings, haptic frequency, click frequency, base layer
 };
@@ -37,6 +36,8 @@ enum custom_keycodes {
 #define KCM_ZOOMD C(KC_MINUS)
 #define KCM_ZOOMR C(KC_0)
 
+#define KCM_HMOD TG(_QWERTY)
+
 #define QWERTY_LEFT1 KC_GRV, KC_1, KC_2, KC_3, KC_4, KC_5
 #define QWERTY_LEFT2 KC_TAB, KC_Q, KC_W, KC_E, KC_R, KC_T
 #define QWERTY_LEFT3 KCM_C_ESC, KC_A, KC_S, KC_D, KC_F, KC_G
@@ -48,7 +49,7 @@ enum custom_keycodes {
 #define QWERTY_RIGHT4 KC_N, KC_M, KC_COMM, KC_DOT, KCM_S_SL, KC_RSFT
 
 #define BASE_LTHUMB4 KC_LALT, KC_LGUI, MO(_FUNC1), KC_ENT
-#define BASE_RTHUMB4 KC_SPC, MO(_FUNC2), KC_BSPC, KC_RCTL
+#define BASE_RTHUMB4 KC_SPC, MO(_FUNC2), KC_BSPC, _______
 
 #define FUNC1_LEFT1 KC_F11, KC_F1, KC_F2, KC_F3, KC_F4, KC_F5
 #define FUNC1_LEFT2 _______, _______, _______, KC_END, _______, _______
@@ -60,8 +61,8 @@ enum custom_keycodes {
 #define FUNC1_RIGHT3 KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT, _______, _______
 #define FUNC1_RIGHT4 KC_PGUP, KC_PGDN, _______, _______, _______, _______
 
-#define HMOD_LEFT _______, KCM_G_A, KCM_A_S, KCM_C_D, KCM_S_F, _______
-#define HMOD_RIGHT _______, KCM_S_J, KCM_C_K, KCM_A_L, KCM_G_SC, _______
+#define HMOD_LEFT KCM_C_ESC, KCM_G_A, KCM_A_S, KCM_C_D, KCM_S_F, KC_G
+#define HMOD_RIGHT KC_H, KCM_S_J, KCM_C_K, KCM_A_L, KCM_G_SC, KC_QUOT
 
 #define FUNC2_LEFT1 QK_BOOT,   UG_TOGG, UG_HUEU, UG_SATU, UG_VALU, _______
 #define FUNC2_LEFT2 QK_REBOOT, UG_NEXT, UG_HUED, UG_SATD, UG_VALD, _______
@@ -73,7 +74,23 @@ enum custom_keycodes {
 #define FUNC2_RIGHT3 TRANSPARENT_ROW
 #define FUNC2_RIGHT4 _______, KC_MUTE, _______, _______, _______, _______
 #define FUNC2_LEFT_T KC_DBG, _______, _______, _______
-#define FUNC2_RIGHT_T KC_HMOD, _______, _______, _______
+#define FUNC2_RIGHT_T KCM_HMOD, _______, _______, _______
+
+    // ┌──────┬──────┬──────┬──────┬──────┬──────┬──────┬──────┬──────┬──────┬──────┬──────┐
+    // │   #  │   #  │   #  │   #  │   #  │   #  │   #  │   #  │   #  │   #  │   #  │   #  │
+    // ├──────┼──────┼──────┼──────┼──────┼──────┼──────┼──────┼──────┼──────┼──────┼──────┤
+    // │Qwerty│   S  │   T  │   P  │   H  │   *  │   *  │   F  │   P  │   L  │   T  │   D  │
+    // ├──────┼──────┼──────┼──────┼──────┼──────┼──────┼──────┼──────┼──────┼──────┼──────┤
+    // │Qwerty│   S  │   K  │   W  │   R  │   *  │   *  │   R  │   B  │   G  │   S  │   Z  │
+    // └──────┴──────┴──────┴──────┼──────┼──────┼──────┼──────┼──────┴──────┴──────┴──────┘
+    //                             │   A  │   O  │   E  │   U  │
+    //                             └──────┴──────┴──────┴──────┘
+
+    // [_GEMINI] = LAYOUT(
+    //     STN_N1,  STN_N2,  STN_N3,  STN_N4,  STN_N5,  STN_N6,  STN_N7,  STN_N8,  STN_N9,  STN_NA,  STN_NB,  STN_NC ,
+    //     QWERTY1, STN_S1,  STN_TL,  STN_PL,  STN_HL,  STN_ST1, STN_ST3, STN_FR,  STN_PR,  STN_LR,  STN_TR,  STN_DR ,
+    //     QWERTY2, STN_S2,  STN_KL,  STN_WL,  STN_RL,  STN_ST2, STN_ST4, STN_RR,  STN_BR,  STN_GR,  STN_SR,  STN_ZR ,
+    //                                         STN_A,   STN_O,   STN_E,   STN_U
 
 #define TRANSPARENT_ROW _______, _______, _______, _______, _______, _______
 #define TRANSPARENT_THUMB4 _______, _______, _______, _______
