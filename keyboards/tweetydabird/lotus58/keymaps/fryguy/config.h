@@ -41,8 +41,5 @@
 #define SPLIT_WATCHDOG_ENABLE
 #define SPLIT_WATCHDOG_TIMEOUT 3000
 
-// defined the debounce time for OS detection, in milliseconds
-#define OS_DETECTION_DEBOUNCE 200
-
-// enables the keyboard reset upon a USB device reinitilization, such as switching devices on some KVMs
-#define OS_DETECTION_KEYBOARD_RESET
+#define USB_WAIT_FOR_ENUMERATION
+#define WAIT_FOR_USB_CHECK_INTERVAL 100
