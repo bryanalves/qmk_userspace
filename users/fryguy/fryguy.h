@@ -11,8 +11,8 @@ enum layer_number {
 
 enum custom_keycodes {
     KC_DBG = SAFE_RANGE,
-    FWD_CFG,  // turn encoder while holding mod combinations to adjust features
-    REV_CFG,  // e.g. RGB settings, haptic frequency, click frequency, base layer
+    FWD_CFG,
+    REV_CFG,
 };
 
 #define KC_____ KC_TRNS
@@ -76,22 +76,6 @@ enum custom_keycodes {
 #define FUNC2_LEFT_T KC_DBG, _______, _______, _______
 #define FUNC2_RIGHT_T KCM_HMOD, _______, _______, _______
 
-    // ┌──────┬──────┬──────┬──────┬──────┬──────┬──────┬──────┬──────┬──────┬──────┬──────┐
-    // │   #  │   #  │   #  │   #  │   #  │   #  │   #  │   #  │   #  │   #  │   #  │   #  │
-    // ├──────┼──────┼──────┼──────┼──────┼──────┼──────┼──────┼──────┼──────┼──────┼──────┤
-    // │Qwerty│   S  │   T  │   P  │   H  │   *  │   *  │   F  │   P  │   L  │   T  │   D  │
-    // ├──────┼──────┼──────┼──────┼──────┼──────┼──────┼──────┼──────┼──────┼──────┼──────┤
-    // │Qwerty│   S  │   K  │   W  │   R  │   *  │   *  │   R  │   B  │   G  │   S  │   Z  │
-    // └──────┴──────┴──────┴──────┼──────┼──────┼──────┼──────┼──────┴──────┴──────┴──────┘
-    //                             │   A  │   O  │   E  │   U  │
-    //                             └──────┴──────┴──────┴──────┘
-
-    // [_GEMINI] = LAYOUT(
-    //     STN_N1,  STN_N2,  STN_N3,  STN_N4,  STN_N5,  STN_N6,  STN_N7,  STN_N8,  STN_N9,  STN_NA,  STN_NB,  STN_NC ,
-    //     QWERTY1, STN_S1,  STN_TL,  STN_PL,  STN_HL,  STN_ST1, STN_ST3, STN_FR,  STN_PR,  STN_LR,  STN_TR,  STN_DR ,
-    //     QWERTY2, STN_S2,  STN_KL,  STN_WL,  STN_RL,  STN_ST2, STN_ST4, STN_RR,  STN_BR,  STN_GR,  STN_SR,  STN_ZR ,
-    //                                         STN_A,   STN_O,   STN_E,   STN_U
-
 #define TRANSPARENT_ROW _______, _______, _______, _______, _______, _______
 #define TRANSPARENT_THUMB4 _______, _______, _______, _______
 
@@ -100,6 +84,3 @@ const void write_mods_state(void);
 const void write_host_led_state(void);
 const void write_rgb_state(void);
 const void write_qmk_logo(void);
-
-//PDF(layer)
-//TG(layer)

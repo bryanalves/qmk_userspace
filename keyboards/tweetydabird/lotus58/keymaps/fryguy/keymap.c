@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
 
 #include "fryguy.h"
+#include "combo.h"
 
 #define LAYOUT_EXPAND(...) LAYOUT(__VA_ARGS__)
 
@@ -51,45 +52,42 @@ const char chordal_hold_layout[MATRIX_ROWS][MATRIX_COLS] PROGMEM =
                   '*', '*', '*', '*', '*', '*', '*', '*', '*', '*'
     );
 
-#if defined(ENCODER_MAP_ENABLE)
+
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
     [_QWERTY_MODS] = { ENCODER_CCW_CW(KCM_ZOOMU, KCM_ZOOMD), ENCODER_CCW_CW(KCM_ZOOMU, KCM_ZOOMD) },
     [_QWERTY] = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
     [_FUNC1] = { ENCODER_CCW_CW(FWD_CFG, REV_CFG), ENCODER_CCW_CW(FWD_CFG, REV_CFG) },
     [_FUNC2] = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS) }
 };
-#endif // ENCODER_MAP_ENABLE
 
-#if defined(COMBO_ENABLE)
-#    include "combo.h"
-#endif
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case FWD_CFG:
+        case REV_CFG:
+            if (record->event.pressed) {
+                switch (get_mods() | get_oneshot_mods()) {
+                    case MOD_BIT(KC_LGUI):
+                        keycode == FWD_CFG ? rgb_matrix_increase_hue() : rgb_matrix_decrease_hue();
+                        break;
+                    case MOD_BIT(KC_LALT):
+                        keycode == FWD_CFG ? rgb_matrix_increase_sat() : rgb_matrix_decrease_sat();
+                        break;
+                    case MOD_BIT(KC_LCTL):
+                        keycode == FWD_CFG ? rgb_matrix_increase_val() : rgb_matrix_decrease_val();
+                        break;
+                    case MOD_BIT(KC_LSFT):
+                        keycode == FWD_CFG ? rgb_matrix_increase_speed() : rgb_matrix_decrease_speed();
+                        break;
+                    case MOD_BIT(KC_LSFT) | MOD_BIT(KC_LCTL):
+                        keycode == FWD_CFG ? rgb_matrix_step() : rgb_matrix_step_reverse();
+                        break;
+                    default:
+                        break;
+                }
+            }
 
-#ifdef OLED_ENABLE
-
-bool is_oled_enabled = true;
-
-oled_rotation_t oled_init_user(oled_rotation_t rotation) {
-    return OLED_ROTATION_0;
-}
-
-bool oled_task_user(void) {
-    if (!is_oled_enabled) {
-        oled_off();
-        return false;
-    } else  {
-        oled_on();
+            return false;
     }
 
-    write_layer_state();
-    write_mods_state();
-    write_host_led_state();
-    write_rgb_state();
-
-   return false;
+    return true;
 }
-
-void housekeeping_task_user(void) {
-    is_oled_enabled = (bool)((last_input_activity_elapsed()) < 20000);
-}
-
-#endif // OLED_ENABLE

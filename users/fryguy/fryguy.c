@@ -61,36 +61,33 @@ void write_qmk_logo(void) {
     oled_write_P(qmk_logo, false);
 }
 
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
-        case FWD_CFG:
-        case REV_CFG:
-            if (record->event.pressed) {
-                switch (get_mods() | get_oneshot_mods()) {
-#if defined(RGB_MATRIX_ENABLE)
-                    case MOD_BIT(KC_LGUI):
-                        keycode == FWD_CFG ? rgb_matrix_increase_hue() : rgb_matrix_decrease_hue();
-                        break;
-                    case MOD_BIT(KC_LALT):
-                        keycode == FWD_CFG ? rgb_matrix_increase_sat() : rgb_matrix_decrease_sat();
-                        break;
-                    case MOD_BIT(KC_LCTL):
-                        keycode == FWD_CFG ? rgb_matrix_increase_val() : rgb_matrix_decrease_val();
-                        break;
-                    case MOD_BIT(KC_LSFT):
-                        keycode == FWD_CFG ? rgb_matrix_increase_speed() : rgb_matrix_decrease_speed();
-                        break;
-                    case MOD_BIT(KC_LSFT) | MOD_BIT(KC_LCTL):
-                        keycode == FWD_CFG ? rgb_matrix_step() : rgb_matrix_step_reverse();
-                        break;
-#endif // RGB_MATRIX_ENABLE
-                    default:
-                        break;
-                }
-            }
 
-            return false;
+#ifdef OLED_ENABLE
+
+bool is_oled_enabled = true;
+
+oled_rotation_t oled_init_user(oled_rotation_t rotation) {
+    return OLED_ROTATION_0;
+}
+
+bool oled_task_user(void) {
+    if (!is_oled_enabled) {
+        oled_off();
+        return false;
+    } else  {
+        oled_on();
     }
 
-    return true;
+    write_layer_state();
+    write_mods_state();
+    write_host_led_state();
+    write_rgb_state();
+
+   return false;
 }
+
+void housekeeping_task_user(void) {
+    is_oled_enabled = (bool)((last_input_activity_elapsed()) < 20000);
+}
+
+#endif // OLED_ENABLE
