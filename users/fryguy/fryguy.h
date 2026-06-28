@@ -49,7 +49,7 @@ enum custom_keycodes {
 #define QWERTY_RIGHT4 KC_N, KC_M, KC_COMM, KC_DOT, KCM_S_SL, KC_RSFT
 
 #define BASE_LTHUMB4 KC_LALT, KC_LGUI, MO(_FUNC1), KC_ENT
-#define BASE_RTHUMB4 KC_SPC, MO(_FUNC2), KC_BSPC, _______
+#define BASE_RTHUMB4 KC_SPC, MO(_FUNC2), KC_BSPC, KC_F13
 
 #define FUNC1_LEFT1 KC_F11, KC_F1, KC_F2, KC_F3, KC_F4, KC_F5
 #define FUNC1_LEFT2 _______, _______, _______, KC_END, _______, _______
